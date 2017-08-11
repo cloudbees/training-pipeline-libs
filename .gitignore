@@ -1,0 +1,16 @@
+.DS_Store
+.localized
+target
+node_modules
+.bundle
+dist
+/.idea
+/*.iml
+.sass-cache
+~*.pptx
+~*.docx
+*.zip
+packer_cache
+cloudbees-*-training
+output-vbox
+packer-manifest.json
