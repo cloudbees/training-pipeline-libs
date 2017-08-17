@@ -3,13 +3,13 @@ def runPreDeploymentTests(serviceName, registry) {
     def dir = pwd()
     sh "mkdir -p ${dir}/db"
     sh "chmod 0777 ${dir}/db"
-      sh "docker run --rm -v $dir/training-books-ms/target/scala-2.10:/source/target/scala-2.10 -v db:/data/db docker-registry:5000 ./run_tests.sh"
+      sh "docker run --rm -v $dir/training-books-ms/target/scala-2.10:/source/target/scala-2.10 -v db:/data/db ${registry}/${serviceName} ./run_tests.sh"
 }
 
 def build(serviceName, registry) {
     stage "build"
-      sh "docker build -t docker-registry:5000/books-ms ."
-                    sh "docker push docker-registry:5000/books-ms"
+      sh "docker build -t ${registry}/books-ms ."
+                    sh "docker push ${registry}0/books-ms"
                     stash includes: "docker-compose*.yml", name: "docker-compose"
     stash includes: "docker-compose*.yml", name: "docker-compose"
 }
