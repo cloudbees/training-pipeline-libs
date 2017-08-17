@@ -9,7 +9,7 @@ def runPreDeploymentTests(serviceName, registry) {
 def build(serviceName, registry) {
     stage "build"
       sh "docker build -t ${registry}/books-ms ."
-                    sh "docker push ${registry}0/books-ms"
+                    sh "docker push ${registry}/books-ms"
                     stash includes: "docker-compose*.yml", name: "docker-compose"
     stash includes: "docker-compose*.yml", name: "docker-compose"
 }
