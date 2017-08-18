@@ -33,7 +33,7 @@ def deploy(serviceName, registry) {
 def runPostDeploymentTests(serviceName, registry, domain) {
     def tests = docker.image("${registry}/${serviceName}-tests")
     tests.inside() {
-        withEnv(["TEST_TYPE=integ", "DOMAIN=${domain}"]) {
+        withEnv(["TEST_TYPE=integ", "DOMAIN=http://172.17.0.1:8081"]) {
             retry(2) {
                 sh "./run_tests.sh"
                     }
