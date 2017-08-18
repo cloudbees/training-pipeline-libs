@@ -6,8 +6,8 @@ def runPreDeploymentTests(serviceName, registry) {
     }
 
 def build(serviceName, registry) {
-      sh "docker build -t ${registry}/books-ms ."
-      sh "docker push ${registry}/books-ms"
+      sh "docker build -t ${registry}/${serviceName} ."
+      sh "docker push ${registry}/${serviceName}"
       stash includes: "docker-compose*.yml", name: "docker-compose"
 
 }
