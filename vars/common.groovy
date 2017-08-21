@@ -2,7 +2,8 @@ def runPreDeploymentTests(serviceName, registry) {
     def dir = pwd()
     sh "mkdir -p ${dir}/db"
     sh "chmod 0777 ${dir}/db"
-      sh "docker run --rm -v $dir/target/scala-2.10:/source/target/scala-2.10 -v db:/data/db ${registry}/${serviceName}-tests ./run_tests.sh"
+    sh "docker run --rm -v $dir/target/scala-2.10:/source/target/scala-2.10 -v db:/data/db ${registry}/${serviceName}-tests ./run_tests.sh"
+    sh "docker run -v ${dir}:/workspace ${registry}/${serviceName}-tests chmod 0777 /workspace"
     }
 
 def build(serviceName, registry) {
