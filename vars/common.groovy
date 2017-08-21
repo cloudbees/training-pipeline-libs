@@ -34,6 +34,7 @@ def deploy(serviceName, registry) {
 def runPostDeploymentTests(serviceName, registry) {
     withEnv(["TEST_TYPE=integ", "DOMAIN=http://192.168.0.1:8081"]) {
          sh "docker run --rm ${registry}/${serviceName}-tests ./run_tests.sh"
+    }
 }
 
 return this;
