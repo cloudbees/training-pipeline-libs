@@ -36,7 +36,9 @@ def runPostDeploymentTests(serviceName, registry) {
     tests.inside() {
         withEnv(["TEST_TYPE=integ", "DOMAIN=http://172.17.0.1:8081"]) {
             retry(2) {
+                sh "chmod -R 0777 ."
                 sh "./run_tests.sh"
+                sh "chmod -R 0777 ."
                     }
         }
         }
