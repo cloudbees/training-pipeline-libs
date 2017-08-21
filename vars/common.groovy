@@ -33,8 +33,8 @@ def deploy(serviceName, registry) {
 
 def runPostDeploymentTests(serviceName, registry) {
     def tests = docker.image("${registry}/${serviceName}-tests")
-    tests.inside('-u 0:0') {
-        withEnv(["TEST_TYPE=integ", "DOMAIN=http://172.17.0.1:8081"]) {
+    tests.inside('-u 0:0 --add-host app-to-test:192.168.0.1') {
+        withEnv(["TEST_TYPE=integ", "DOMAIN=http://192.168.0.1:8081"]) {
             retry(2) {
                 sh "chmod -R 0777 ."
                 sh "./run_tests.sh"
